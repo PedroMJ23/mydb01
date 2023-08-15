@@ -1,15 +1,18 @@
 import express, { Express } from "express";
 import userRoutes  from '../routes/usersr';
 import { conectDB } from "../database/config";
+import cors from 'cors';
 
 export class Server {
   app: Express;
+  port: string | number | undefined;
 
   constructor() {
     this.app = express();
     this.conectToDb();
     this.middlewares();
     this.routes();
+    this.port = process.env.PORT
     
   }
   async conectToDb(): Promise<void> {
@@ -17,6 +20,7 @@ export class Server {
   }
 
   middlewares(): void {
+    this.app.use(cors());
     this.app.use(express.json());
   }
 
@@ -26,8 +30,8 @@ export class Server {
 
   
   listen(): void{
-    this.app.listen(8080, ()=>{
-        console.log('Running on port 8080')
+    this.app.listen( this.port, ()=>{
+        console.log(`Running on port ${this.port}`)
     })
   }
 

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const conectDB =async () => {
     try {
-        await mongoose.connect("mongodb+srv://mydb01:@appdb01.z8anrmf.mongodb.net/");
+        await mongoose.connect("mongodb+srv://mydb01:UiCVrTsFRusCZ6cw@appdb01.z8anrmf.mongodb.net/");
         console.log('Data Base On Line!')
 
 

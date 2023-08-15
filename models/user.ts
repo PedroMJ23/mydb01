@@ -1,36 +1,54 @@
 import { Model, Schema, model } from "mongoose";
+import { ROLES } from "../helpers/constants";
 
 export interface IUser {
-  nombre: String;
-  email: String;
-  password: String;
-  estado?: Boolean;
+  nombre: string;
+  email: string;
+  password: string;
+  estado?: boolean;
+  rol?: string;
 }
 
 const UserSchema = new Schema<IUser>({
   nombre: {
     type: String,
     required: true,
-    unique: true,
+    //unique: true,
   },
   email: {
     type: String,
     required: true,
-    unique: true,
+    //unique: true,
   },
   password: {
     type: String,
     required: true,
-    unique: true,
+    //unique: true,
   },
   estado: {
     type: Boolean,
     required: true,
     default: true,
   },
+  rol: {
+    type: String,
+    default: ROLES.user,
+  },
 });
+/*
+const User: Model<IUser> = model<IUser>("User", UserSchema);
 
+export default User;
+*/
+/*
+UserSchema.methods.toJSON = function(){
+  const {__v, password, _id, ...usuario} = this.toObjetc()
+  return usuario
+}
+*/
 
 const User: Model<IUser> = model<IUser>('User', UserSchema);
 
 export default User;
+
+

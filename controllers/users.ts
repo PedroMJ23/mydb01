@@ -1,17 +1,35 @@
 import {Request, Response} from 'express';
 
 import User, {IUser} from '../models/user';
+import bcryptjs from 'bcryptjs';
+import { ROLES } from '../helpers/constants';
 
 export const createUser =async (req: Request, res: Response) => {
     const userData: IUser = req.body
+   // const {nombre, email, password, estado}: IUser = req.body
 
-    const user = new User(userData)
+    const user = new User(userData);
+    const pass = user.password;
+
+    const salt  = bcryptjs.genSaltSync();
+   
+    user.password = bcryptjs.hashSync(pass, salt);
+
+    const adminKey = req.headers["admin-key"]
+    
+    if(adminKey === process.env.KEYFORADMIN){
+        user.rol = ROLES.admin;
+
+    }
+    
 
     await user.save();
+    const {nombre, email} = user;
 
     res.json({
         msg: 'All good!',
-        user
+        nombre,
+        email
     })
 
 
@@ -25,6 +43,7 @@ export const getUsers =async ({}, res: Response) => {
     res.json({
         users
     })
+    
 
     
 }
