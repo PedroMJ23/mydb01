@@ -1,10 +1,14 @@
 import { Router } from "express";
 import {
   createUser,
-  deleteUser,
-  getUserbyname,
+  login,
   getUsers,
+  getUserbyname,
   updateUser,
+  deleteUser
+
+
+  
 } from "../controllers/users";
 import { check } from "express-validator";
 import { recolectarErrores } from "../middlewares/recolectarerrores";
@@ -27,9 +31,25 @@ router.post(
   ],
   createUser
 );
+
+router.post(
+  "/login",
+  [
+    check("email", "El email es obligatorio").isEmail(),
+    check("password", "El password debe ser de 5 caracteres").isLength({
+      min: 5,
+    }),
+  ],
+  recolectarErrores,
+
+  login
+);
+
+
 router.get("/", getUsers);
 router.get("/:nombre", getUserbyname);
 router.put("/:nombre", updateUser);
 router.delete("/:nombre", deleteUser);
+
 
 export default router;

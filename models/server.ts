@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import userRoutes  from '../routes/usersr';
+import ordersRoutes  from '../routes/ordersr';
 import { conectDB } from "../database/config";
 import cors from 'cors';
 
@@ -26,6 +27,7 @@ export class Server {
 
   routes(): void{
     this.app.use("/users", userRoutes)
+    this.app.use("/orders",ordersRoutes )
   }
 
   
