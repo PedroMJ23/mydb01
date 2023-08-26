@@ -14,9 +14,9 @@ export const getOrders = async (req: Request, res: Response): Promise<void> => {
 
   const orders: IOrder[] = await Order.find(consulta);
 
-  if (!orders) {
+  if (!orders || orders.length === 0) {
     res.status(404).json({
-      msg: "Order Not Found!",
+      msg: "Orders Not Found!",
     });
     return;
   }
