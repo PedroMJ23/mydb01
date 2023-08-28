@@ -5,6 +5,7 @@ export const recolectarErrores = (req: Request, res: Response, next: NextFunctio
 
     const errores: Result<ValidationError> = validationResult(req);
 /*
+Alternativa:
     if(!errores.isEmpty){
         res.status(400).json(errores)
     }else{

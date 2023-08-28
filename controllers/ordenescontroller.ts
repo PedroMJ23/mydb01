@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import OrdenModel, {IOrden} from "../models/ordenes";// Ajusta la importación según la ubicación de tu modelo
-import UserModel, { IUser } from "../models/user"; // Importa el modelo de usuario si es necesario
+import OrdenModel, {IOrden} from "../models/ordenes";
+import UserModel, { IUser } from "../models/user"; 
 import { ObjectId } from "mongoose";
 
 export const getOrdenes = async (req: Request, res: Response): Promise<void> => {
   try {
-    const userEmail: string = req.params.email; // Obtén el email del parámetro de la URL
+    const userEmail: string = req.params.email; // email del parámetro de la URL
 
     const ordenes: IOrden[] = await OrdenModel.find({ usuario: userEmail });
 
@@ -31,7 +31,7 @@ export const getOrdenes = async (req: Request, res: Response): Promise<void> => 
 
 export const crearOrden = async (req: Request, res: Response): Promise<void> => {
   try {
-    //const usuarioId: ObjectId = req.body.confirmedUsers._id;
+  
 
     const ordenData: IOrden = req.body;
 
@@ -62,7 +62,7 @@ export const crearOrden = async (req: Request, res: Response): Promise<void> => 
 };
 export const eliminarOrden = async (req: Request, res: Response): Promise<void> => {
   try {
-    const ordenId: ObjectId | any = req.params.ordenId; // Obtén el ID de la orden de los parámetros de la URL
+    const ordenId: ObjectId | any = req.params.ordenId; // ID de la orden de los parámetros de la URL
 
     const ordenEliminada = await OrdenModel.findByIdAndDelete(ordenId);
 

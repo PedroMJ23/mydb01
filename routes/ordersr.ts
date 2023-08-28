@@ -1,5 +1,4 @@
 import { Router } from "express";
-
 import { createOrder, getOrders } from '../controllers/orders';
 import { confirmedUsersMiddleware } from "../middlewares/confirmedusers";
 import { recolectarErrores } from "../middlewares/recolectarerrores";

@@ -35,12 +35,10 @@ const UserSchema = new Schema<IUser>({
     default: ROLES.user,
   },
 });
-/*
-const User: Model<IUser> = model<IUser>("User", UserSchema);
 
-export default User;
-*/
 /*
+Funciṕn para que la respuesta no contenga ni el _id, ni la pass, etc. 
+En el json de res esta configurado de todas maneras. 
 UserSchema.methods.toJSON = function(){
   const {__v, password, _id, ...usuario} = this.toObjetc()
   return usuario
