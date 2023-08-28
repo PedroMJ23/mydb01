@@ -7,8 +7,7 @@ import { generateJWT } from "../helpers/generateJWT";
 
 export const createUser = async (req: Request, res: Response) => {
   const userData: IUser = req.body;
-  // const {nombre, email, password, estado}: IUser = req.body
-
+  
   const user = new User(userData);
   const pass = user.password;
 
