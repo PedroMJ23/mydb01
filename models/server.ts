@@ -3,6 +3,7 @@ import userRoutes  from '../routes/usersr';
 import ordersRoutes  from '../routes/ordersr';
 import { conectDB } from "../database/config";
 import cors from 'cors';
+import ordenesRoutes from "../routes/ordenesr"
 
 export class Server {
   app: Express;
@@ -27,7 +28,8 @@ export class Server {
 
   routes(): void{
     this.app.use("/users", userRoutes)
-    this.app.use("/orders",ordersRoutes )
+    this.app.use("/orders",ordersRoutes)
+    this.app.use("/ordenes", ordenesRoutes)
   }
 
   
