@@ -7,6 +7,15 @@ import { generateJWT } from "../helpers/generateJWT";
 
 export const createUser = async (req: Request, res: Response) => {
   const userData: IUser = req.body;
+
+  const existUser =  await User.findOne({email: userData.email})
+
+  if(existUser){
+    res.status(400).json({
+      msg:"La cuenta ya existe!"
+    })
+    return;
+  }
   
   const user = new User(userData);
   const pass = user.password;
