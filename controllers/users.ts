@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-
 import User, { IUser } from "../models/user";
 import bcryptjs from "bcryptjs";
 import { ROLES } from "../helpers/constants";
@@ -8,15 +7,15 @@ import { generateJWT } from "../helpers/generateJWT";
 export const createUser = async (req: Request, res: Response) => {
   const userData: IUser = req.body;
 
-  const existUser =  await User.findOne({email: userData.email})
+  const existUser = await User.findOne({ email: userData.email });
 
-  if(existUser){
+  if (existUser) {
     res.status(400).json({
-      msg:"La cuenta ya existe!"
-    })
+      msg: "La cuenta ya existe!",
+    });
     return;
   }
-  
+
   const user = new User(userData);
   const pass = user.password;
 
@@ -34,7 +33,7 @@ export const createUser = async (req: Request, res: Response) => {
   const { nombre, email } = user;
 
   res.json({
-    msg: "All good!",
+    msg: "Usuario creado!",
     nombre,
     email,
   });
@@ -60,9 +59,16 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     }
 
     const token = await generateJWT(user.id);
+    const userEmail = user.email;
+    const userNombre = user.nombre;
+    const userEstado = user.estado;
+    const userRol = user.rol;
 
     res.json({
-      user,
+      userNombre,
+      userEmail,
+      userEstado,
+      userRol,
       token,
     });
   } catch (error) {
@@ -92,14 +98,11 @@ export const getUserbyname = async (req: Request, res: Response) => {
       msg: "User not found!",
     });
   } else {
-    const {nombre, email, estado}:IUser = user;
+    const { nombre, email, estado }: IUser = user;
     res.json({
-      nombre, 
+      nombre,
       email,
       estado,
-     
-
-
     });
   }
 };

@@ -5,7 +5,7 @@ import { ObjectId } from "mongoose";
 
 export const getOrdenes = async (req: Request, res: Response): Promise<void> => {
   try {
-    const userEmail: string = req.params.email; // email del parámetro de la URL
+    const userEmail: string = req.params.email; 
 
     const ordenes: IOrden[] = await OrdenModel.find({ usuario: userEmail });
 
@@ -60,9 +60,10 @@ export const crearOrden = async (req: Request, res: Response): Promise<void> => 
     });
   }
 };
+
 export const eliminarOrden = async (req: Request, res: Response): Promise<void> => {
   try {
-    const ordenId: ObjectId | any = req.params.ordenId; // ID de la orden de los parámetros de la URL
+    const ordenId: ObjectId | any = req.params.ordenId; 
 
     const ordenEliminada = await OrdenModel.findByIdAndDelete(ordenId);
 
