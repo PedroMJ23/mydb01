@@ -59,16 +59,10 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     }
 
     const token = await generateJWT(user.id);
-    const userEmail = user.email;
-    const userNombre = user.nombre;
-    const userEstado = user.estado;
-    const userRol = user.rol;
+    
 
     res.json({
-      userNombre,
-      userEmail,
-      userEstado,
-      userRol,
+      user,
       token,
     });
   } catch (error) {
